@@ -69,8 +69,8 @@ public class Calculator {
                 }
                 //Simpson
                 case "3" ->{
-                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,4, equation);
                     printMethodName("Simpson");
+                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,4, equation);
                 }
                 default -> System.out.println("Данного метода не существует\n");
             }
