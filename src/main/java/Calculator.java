@@ -46,7 +46,7 @@ public class Calculator {
                     continue;
                 }
             }catch (NumberFormatException e){
-                System.out.println("Границы должны быть числами\n");
+                System.out.println("Пределы должны быть числами\n");
                 continue;
             }
             //
