@@ -1,57 +1,78 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Objects;
 import java.util.Scanner;
+
+import methods.RectangleMethod;
+import methods.SimpsonsMethod;
+import methods.TrapezoidMethod;
 import org.apache.commons.io.FileUtils;
 
 public class Calculator {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-//        printMethodName("Trapezoid");
-//        printMethodName("Rectangle");
-//        printMethodName("Simpson");
-        int numOfFunc;
+        int equation;
         double leftBorder,rightBorder;
-        String methodName;
+        String method, buffer;
+
         while(true){
-            printMethods();
-            methodName = scanner.nextLine();
-            if (methodName.equals("exit"))
+            //уравнение
+            printEquations();
+            buffer = scanner.nextLine();
+
+            if (buffer.equals("exit")) {
                 System.exit(0);
-
-            try {
-                printEquations();
-                numOfFunc = scanner.nextInt();
-                if (numOfFunc > 3 || numOfFunc < 1){
-                    System.out.println("Уравнение под данным номером отсутствует");
-                    continue;
-                }
-
-                System.out.println("Введите пределы интегрирования a b:");
-                leftBorder = scanner.nextDouble();
-                rightBorder = scanner.nextDouble();
-                if (!checkBorders(leftBorder,rightBorder))
-                    continue;
-
-            }catch (InputMismatchException e){
-                System.out.println("Границы должны быть числами");
-                continue;
             }
 
-            switch (methodName){
+            try{
+                equation = Integer.parseInt(buffer);
+                if (equation > 3 || equation < 1){
+                    System.out.println("Данного уравнения не существует\n");
+                    continue;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Номер уравнения - целое число\n");
+                continue;
+            }
+            //
+
+            //пределы интегрирования
+            try {
+                System.out.println("Введите пределы интегрирования:");
+                System.out.println("a:");
+                leftBorder = Double.parseDouble(scanner.nextLine());
+                System.out.println("b:");
+                rightBorder = Double.parseDouble(scanner.nextLine());
+                if(!checkBorders(leftBorder,rightBorder)) {
+                    continue;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Границы должны быть числами\n");
+                continue;
+            }
+            //
+
+            //метод
+            printMethods();
+            method = scanner.nextLine();
+            //
+
+            switch (method){
                 //rect
                 case "1" ->{
-
+                    printMethodName("Rectangle");
+                    RectangleMethod.getAnswer(leftBorder,rightBorder,5, equation);
                 }
                 //trap
                 case "2" ->{
-
+                    printMethodName("Trapezoid");
+                    TrapezoidMethod.getAnswer(leftBorder,rightBorder,10, equation);
                 }
-                //Simp
+                //Simpson
                 case "3" ->{
-
+                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,4, equation);
+                    printMethodName("Simpson");
                 }
+                default -> System.out.println("Данного метода не существует\n");
             }
 
         }
@@ -63,10 +84,11 @@ public class Calculator {
 
     public static void printEquations(){
         System.out.println("Введите номер уравнения:");
-        System.out.println("1: ");
+        System.out.println("1: x^2");
         System.out.println("2: ");
         System.out.println("3: ");
         System.out.println("Выход: exit ");
+
     }
 
     public static void printMethods(){
@@ -79,18 +101,18 @@ public class Calculator {
     public static boolean checkBorders(double left, double right){
         if (left >= 0 && right>=0) {
             if (left >= right) {
-                System.out.println("Левая граница не может быть больше\\равна правой");
+                System.out.println("Левая граница не может быть больше\\равна правой\n");
                 return false;
             }
         }
         else if (left < 0 && right < 0){
             if(Math.abs(right) >= Math.abs(left)){
-                System.out.println("Левая граница не может быть больше\\равна правой");
+                System.out.println("Левая граница не может быть больше\\равна правой\n");
                 return false;
             }
         }
         else if(left >= 0 && right < 0){
-            System.out.println("Левая граница не может быть больше\\равна правой");
+            System.out.println("Левая граница не может быть больше\\равна правой\n");
             return false;
         }
         return true;
