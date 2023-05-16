@@ -11,7 +11,7 @@ public class Calculator {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         int equation;
-        double leftBorder,rightBorder;
+        double leftBorder, rightBorder, epsilon;
         String method, buffer;
 
         while(true){
@@ -45,8 +45,15 @@ public class Calculator {
                 if(!checkBorders(leftBorder,rightBorder)) {
                     continue;
                 }
+                System.out.println("Введите epsilon:");
+                epsilon = Math.abs(Double.parseDouble(scanner.nextLine()));
+                if (epsilon > 1){
+                    System.out.println("Epsilon не может быть больше 1");
+                    continue;
+                }
+
             }catch (NumberFormatException e){
-                System.out.println("Пределы должны быть числами\n");
+                System.out.println("Вводные должны быть числами\n");
                 continue;
             }
             //
@@ -60,17 +67,17 @@ public class Calculator {
                 //rect
                 case "1" ->{
                     printMethodName("Rectangle");
-                    RectangleMethod.getAnswer(leftBorder,rightBorder,4, equation);
+                    RectangleMethod.getAnswer(leftBorder,rightBorder,epsilon,4, equation);
                 }
                 //trap
                 case "2" ->{
                     printMethodName("Trapezoid");
-                    TrapezoidMethod.getAnswer(leftBorder,rightBorder,4, equation);
+                    TrapezoidMethod.getAnswer(leftBorder,rightBorder,epsilon,4, equation);
                 }
                 //Simpson
                 case "3" ->{
                     printMethodName("Simpson");
-                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,4, equation);
+                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,epsilon,4, equation);
                 }
                 default -> System.out.println("Данного метода не существует\n");
             }
