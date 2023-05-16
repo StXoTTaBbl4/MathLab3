@@ -46,9 +46,11 @@ public class Calculator {
                     continue;
                 }
                 System.out.println("Введите epsilon:");
-                epsilon = Math.abs(Double.parseDouble(scanner.nextLine()));
-                if (epsilon > 1){
-                    System.out.println("Epsilon не может быть больше 1");
+                buffer = scanner.nextLine();
+                buffer = buffer.replace(",",".");
+                epsilon = Math.abs(Double.parseDouble(buffer));
+                if (epsilon > 1 || epsilon <= 0){
+                    System.out.println("Epsilon не может быть больше 1 или меньше 0");
                     continue;
                 }
 

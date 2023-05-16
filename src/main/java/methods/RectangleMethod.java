@@ -13,8 +13,6 @@ public class RectangleMethod {
 
     public static void getAnswer(double a, double b,double epsilon, int intervals, int eq){
 
-
-
         System.out.println("Мод: левые");
         double I_0 = calculate_left_I_0(a,b,intervals,eq);
         int intervals_Buf = intervals*2;
@@ -22,19 +20,17 @@ public class RectangleMethod {
 
         int c = 0;
         while ((Math.abs(I_1-I_0) > epsilon)){
-            System.out.println("I_0 = " + I_0 + "; I_1 = " + I_1);
             intervals_Buf *=2;
             I_0 = I_1;
             I_1 = calculate_left_I_1(a,b,intervals_Buf,eq);
             c++;
         }
-        System.out.println("|I_1-I_0| = " + (I_1-I_0));
-
-        System.out.println("h: " + h);
-        System.out.println("n: " + intervals_Buf);
-        System.out.println(table);
-        System.out.println("Ответ: " + Math.round(I_1*(1/epsilon))*epsilon);
-        System.out.println("Точное значение: " + Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon);
+        Method.printAnswer(table,
+                h,
+                I_0,
+                I_1,
+                Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon,
+                intervals_Buf);
 
 
         System.out.println("\nМод: правые");
@@ -44,18 +40,18 @@ public class RectangleMethod {
 
         c = 0;
         while ((Math.abs(I_1-I_0) > epsilon)){
-            System.out.println("I_0 = " + I_0 + "; I_1 = " + I_1);
             intervals_Buf *=2;
             I_0 = I_1;
             I_1 = calculate_right_I_1(a,b,intervals_Buf,eq);
             c++;
         }
 
-        System.out.println("h: " + h);
-        System.out.println("n: " + intervals_Buf);
-        System.out.println(table);
-        System.out.println("Ответ: " + Math.round(I_1*(1/epsilon))*epsilon);
-        System.out.println("Точное значение: " + Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon);
+        Method.printAnswer(table,
+                h,
+                I_0,
+                I_1,
+                Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon,
+                intervals_Buf);
 
 
         System.out.println("\nМод: средние");
@@ -65,21 +61,18 @@ public class RectangleMethod {
 
         c = 0;
         while ((Math.abs(I_1-I_0) > epsilon)){
-            System.out.println("I_0 = " + I_0 + "; I_1 = " + I_1);
             intervals_Buf *=2;
             I_0 = I_1;
             I_1 = calculate_middle_I_1(a,b,intervals_Buf,eq);
             c++;
         }
 
-        System.out.println("h: " + h);
-        System.out.println("n: " + intervals_Buf);
-        System.out.println(table);
-        System.out.println("Ответ: " + Math.round(I_1*(1/epsilon))*epsilon);
-        System.out.println("Точное значение: " + Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon);
-
-
-        System.out.println("====================");
+        Method.printAnswer(table,
+                h,
+                I_0,
+                I_1,
+                Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon,
+                intervals_Buf);
     }
 
     private  static double calculate_left_I_0(double a, double b, int intervals, int eq){

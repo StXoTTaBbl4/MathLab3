@@ -23,11 +23,13 @@ public class SimpsonsMethod {
             c++;
         }
 
-        System.out.println("h: " + h);
-        System.out.println("n: " + intervals);
-        System.out.println(table);
-        System.out.println("Ответ: " + Math.round(I_1*(1/epsilon))*epsilon);
-        System.out.println("Точное значение: " + Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon);
+        Method.printAnswer(table,
+                h,
+                I_0,
+                I_1,
+                Math.round(Method.getEquation(String.valueOf(eq)).calculateIntegral(a,b)*(1/epsilon))*epsilon,
+                intervals);
+
     }
 
     private  static double calculateI_1(double a, double b, int intervals, int eq){
