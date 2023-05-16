@@ -36,7 +36,6 @@ public class SimpsonsMethod {
             x +=h;
         }
         sum += y_0+y_n;
-//        sum *= h/(intervals-1);
         sum *= h/3;
 
         PrettyTable table = new PrettyTable("i", "x_i","y_i");

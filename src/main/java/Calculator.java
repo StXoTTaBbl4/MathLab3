@@ -60,17 +60,17 @@ public class Calculator {
                 //rect
                 case "1" ->{
                     printMethodName("Rectangle");
-                    RectangleMethod.getAnswer(leftBorder,rightBorder,10, equation);
+                    RectangleMethod.getAnswer(leftBorder,rightBorder,4, equation);
                 }
                 //trap
                 case "2" ->{
                     printMethodName("Trapezoid");
-                    TrapezoidMethod.getAnswer(leftBorder,rightBorder,10, equation);
+                    TrapezoidMethod.getAnswer(leftBorder,rightBorder,4, equation);
                 }
                 //Simpson
                 case "3" ->{
                     printMethodName("Simpson");
-                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,10, equation);
+                    SimpsonsMethod.getAnswer(leftBorder,rightBorder,4, equation);
                 }
                 default -> System.out.println("Данного метода не существует\n");
             }
@@ -84,9 +84,9 @@ public class Calculator {
 
     public static void printEquations(){
         System.out.println("Введите номер уравнения:");
-        System.out.println("1: x^2");
-        System.out.println("2: x^3 - 3*x^2 + 6*x - 19");
-        System.out.println("3: ");
+        System.out.println("1: x^2 (1,2)");
+        System.out.println("2: x^3 - 3*x^2 + 6*x - 19 (2,4)");
+        System.out.println("3: -x^3 -x^2 -2x + 1 (0,2)");
         System.out.println("Выход: exit ");
 
     }
